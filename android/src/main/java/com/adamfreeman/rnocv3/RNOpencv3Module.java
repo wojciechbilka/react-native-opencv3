@@ -70,7 +70,7 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
             Img_hash.pHash(loadedImage, out);
             System.out.println(out);
         } catch (Exception ex) {
-            System.out.println("Exception in runPhash!")
+            System.out.println("Exception in runPhash!");
             reject(promise, "EGENERIC", ex);
         }
     }
