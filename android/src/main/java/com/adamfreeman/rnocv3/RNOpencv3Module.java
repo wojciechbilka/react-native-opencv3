@@ -31,6 +31,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc.*;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.img_hash.Img_hash;
 
 // just for testing purposes ...
 import android.widget.Toast;
@@ -61,17 +62,16 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void runPhash(String s, final Promise promise) {
+    public void runPhash(String filePath, final Promise promise) {
         Log.d("RNOpencv3Module", "Running ReactMethod: runPhash!");
         try {
-            Mat mat = FileUtils.getMatFromImage("/sdcard/DCIM/girl_wide_brim_hat.png", promise);
-            Mat loadedImage = loadImage(s, promise);
+            Mat imageMat = FileUtils.getMatFromImage("/sdcard/DCIM/girl_wide_brim_hat.png", promise);
             Mat out = new Mat();
-            Img_hash.pHash(loadedImage, out);
+            Img_hash.pHash(imageMat, out);
             System.out.println(out);
         } catch (Exception ex) {
             System.out.println("Exception in runPhash!");
-            reject(promise, "EGENERIC", ex);
+            promise.reject("ENOENT", "ENOENT: no such file or directory, please check '" + filePath + "'");
         }
     }
 
