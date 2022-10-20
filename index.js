@@ -10,6 +10,7 @@ import { ColorConv, CvType, Imgproc, Core } from './constants';
 import { CvScalar, CvPoint, CvSize, CvRect } from './coretypes';
 import { Mat, MatOfInt, MatOfFloat, setTo, get } from './mats';
 import { CvImage } from './cvimage';
+import { jsRunPhash } from './phash';
 import { findNodeHandle } from 'react-native';
 
 const CvCameraView = requireNativeComponent('CvCameraView', CvCamera);
@@ -243,6 +244,7 @@ class CvInvoke extends Component {
 const RNCv = RNOpencv3
 
 export {
+  jsRunPhash,
   RNCv,
   CvImage,
   CvCamera,

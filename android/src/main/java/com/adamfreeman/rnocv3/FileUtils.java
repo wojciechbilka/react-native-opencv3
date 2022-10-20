@@ -54,6 +54,44 @@ class FileUtils {
     private static void rejectInvalidParam(Promise promise, String param) {
         promise.reject("EINVAL", "EINVAL: invalid parameter, read '" + param + "'");
     }
+
+    public static Mat getMatFromImage(final String inPath, final Promise promise) {
+        System.out.println("inPath: " + inPath);
+        try {
+            if (inPath == null || inPath.length() == 0) {
+                rejectInvalidParam(promise, inPath);
+                return null;
+            }
+
+            File inFileTest = new File(inPath);
+            if(!inFileTest.exists()) {
+                System.out.println("not exist: " + inPath);
+                rejectFileNotFound(promise, inPath);
+                return null;
+            }
+            if (inFileTest.isDirectory()) {
+                rejectFileIsDirectory(promise, inPath);
+                return null;
+            }
+
+            Bitmap bitmap = BitmapFactory.decodeFile(inPath);
+            if (bitmap == null) {
+                System.out.println("bitmap null: " + inPath);
+                throw new IOException("Decoding error unable to decode: " + inPath);
+            }
+            Mat img = new Mat(bitmap.getHeight(), bitmap.getWidth(), CvType.CV_8UC4);
+            Utils.bitmapToMat(bitmap, img);
+            int matIndex = MatManager.getInstance().addMat(img);
+
+            System.out.println("returning mat: " + inPath);
+            return img;
+        }
+        catch (Exception ex) {
+            reject(promise, "EGENERIC", ex);
+        }
+        System.out.println("after try still null: " + inPath);
+        return null;
+    }
 	
     public static void imageToMat(final String inPath, final Promise promise) {
         try {
