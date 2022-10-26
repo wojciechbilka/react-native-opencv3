@@ -66,7 +66,7 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
     @ReactMethod
     public void runPhash(String filePath, final Promise promise) {
         Log.d("RNOpencv3Module", "Running ReactMethod: runPhash!");
-        Log.d("RNOpencv3Module", "img path: " + filePath);
+        Log.d("RNOpencv3Module", "imgx path: " + filePath);
         try {
 //          Mat imageMat = FileUtils.getMatFromImage("/sdcard/DCIM/girl_wide_brim_hat.png", promise);
 //          Mat imageMat = FileUtils.getMatFromImage("/storage/emulated/0/Pictures/IMG_20221025_183435.png", promise);
@@ -74,6 +74,7 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
             Mat out = new Mat();
             Img_hash.pHash(imageMat, out);
             System.out.println(out);
+            Log.d("RNOpencv3Module", "0, 0: " + (int) out.get(0, 0)[0]);
             System.out.println("0, 0: " + (int) out.get(0, 0)[0]);
             System.out.println("0, 1: " + (int) out.get(0, 1)[0]);
 
@@ -84,6 +85,7 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
                 System.out.println((int) out.get(0, col)[0]);
                 sb.append(hex);
             }
+            Log.d("RNOpencv3Module", "img path: " + filePath);
             System.out.println(sb.toString());
 //            promise.resolve(sb.toString());
         } catch (Exception ex) {
