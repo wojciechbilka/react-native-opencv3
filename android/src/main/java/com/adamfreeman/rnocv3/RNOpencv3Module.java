@@ -33,6 +33,8 @@ import org.opencv.imgproc.Imgproc.*;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.img_hash.Img_hash;
 
+import java.util.*;
+
 // just for testing purposes ...
 import android.widget.Toast;
 
@@ -72,6 +74,14 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
             Mat out = new Mat();
             Img_hash.pHash(imageMat, out);
             System.out.println(out);
+
+            StringBuilder sb = new StringBuilder();
+            for (int col = 0; col < out.cols(); col++) {
+                String hex = Integer.toHexString((int) out.get(0, col)[0]);
+                sb.append(hex);
+            }
+            System.out.println(sb.toString());
+            promise.resolve(sb.toString());
         } catch (Exception ex) {
             System.out.println("Exception in runPhash!");
             promise.reject("ENOENT", "ENOENT: no such file or directory, please check '" + filePath + "'");
