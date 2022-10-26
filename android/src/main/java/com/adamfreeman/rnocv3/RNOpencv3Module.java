@@ -78,10 +78,11 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
             StringBuilder sb = new StringBuilder();
             for (int col = 0; col < out.cols(); col++) {
                 String hex = Integer.toHexString((int) out.get(0, col)[0]);
+                System.out.println((int) out.get(0, col)[0]);
                 sb.append(hex);
             }
             System.out.println(sb.toString());
-            promise.resolve(sb.toString());
+//            promise.resolve(sb.toString());
         } catch (Exception ex) {
             System.out.println(ex);
             System.out.println("Exception in runPhash!");
