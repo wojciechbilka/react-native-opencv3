@@ -74,6 +74,9 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
             Mat out = new Mat();
             Img_hash.pHash(imageMat, out);
             System.out.println(out);
+            System.out.println("0, 0: " + (int) out.get(0, 0)[0]);
+            System.out.println("0, 1: " + (int) out.get(0, 1)[0]);
+
 
             StringBuilder sb = new StringBuilder();
             for (int col = 0; col < out.cols(); col++) {
