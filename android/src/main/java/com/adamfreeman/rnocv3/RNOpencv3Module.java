@@ -87,7 +87,7 @@ public class RNOpencv3Module extends ReactContextBaseJavaModule {
             }
             Log.d("RNOpencv3Module", "img path: " + filePath);
             System.out.println(sb.toString());
-//            promise.resolve(sb.toString());
+            promise.resolve(sb.toString());
         } catch (Exception ex) {
             System.out.println(ex);
             System.out.println("Exception in runPhash!");
